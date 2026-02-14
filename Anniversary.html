@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever Us: Our Anniversary</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #d63384;
+            --primary-red: #e63946;
+            --envelope-color: #f3f3f3;
+            --paper-color: #ffffff;
+            --text-light: #fff;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --shadow: rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Global Styles --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: url('https://source.unsplash.com/featured/?romance') no-repeat center/cover;
+            height: 100vh;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 2s ease-in;
+            padding: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .letter-text h2 {
+    font-family: 'Allura', cursive;
+    font-weight: 400;
+    font-size: 2.6rem;
+    color: #e6004c;
+}
+
+        
+
+        .message {
+            font-size: 1.0em;
+            font-weight: 300;
+        }
+
+    .envelope-section {
+        background: var(--bg-light);
+        color: var(--text-dark);
+    }
+
+    .envelope-container {
+        position: relative;
+        width: 300px; /* Increased width */
+        height: 200px; /* Increased height */
+        cursor: pointer;
+        margin-top: 50px;
+    }
+
+    .envelope-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--envelope-color);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .lid {
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+        /* Adjusted for 600x300 */
+        border-top: 100px solid #f3f3f3;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        transform-origin: top;
+        transition: transform 0.5s ease-in-out;
+        z-index: 4;
+    }
+
+    .envelope-front {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        /* Adjusted for 600x300 */
+        border-bottom: 100px solid #e0e0e0;
+        border-left: 150px solid #ececec;
+        border-right: 150px solid #ececec;
+        z-index: 3;
+    }
+
+    .heart-seal {
+        position: absolute;
+        top: 130px; /* Centered on the larger envelope */
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--primary-red);
+        font-size: 45px;
+        z-index: 5;
+        transition: 0.3s;
+    }
+
+    .letter-card {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+        width: 300;
+        height: 180px;
+        background: var(--paper-color);
+        border: 2px solid #ffcad4;
+        transition: all 0.7s ease-in-out;
+        z-index: 2;
+        padding: 30px;
+        box-sizing: border-box;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .envelope-container.open .lid { transform: rotateX(180deg); z-index: 1; }
+    .envelope-container.open .heart-seal { opacity: 0; }
+    .envelope-container.open .letter-card {
+        transform: translateX(-50%) translateY(-220px); 
+        height: 500px;
+        width: 250px; /* Card expands more on pull out */
+        z-index: 10;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .letter-text { opacity: 0; transition: opacity 0.5s 0.4s; color: #333; }
+    .envelope-container.open .letter-text { opacity: 1; }
+    .letter-text h2 { font-family: 'Dancing Script', cursive; color: var(--primary-red); font-size: 2.2rem; }
+
+        /* --- Gallery Section --- */
+        .gallery {
+            background: #fff;
+            color: var(--text-dark);
+        }
+
+        .gallery h2 {
+            font-size: 2.8em;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 50px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px var(--shadow);
+            transition: 0.4s ease;
+            cursor: pointer;
+        }
+
+        .grid img:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        /* --- Lightbox --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+        .lightbox .close { position: absolute; top: 20px; right: 30px; color: white; font-size: 3em; cursor: pointer; }
+
+        /* --- Video Section --- */
+        .video-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            text-align: center;
+        }
+
+        .video-container {
+            display: none;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .video-container video { width: 100%; display: block; }
+
+        .play-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .play-button:hover { background: #b8266d; transform: translateY(-3px); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px;
+            background: #222;
+            text-align: center;
+            color: #888;
+        }
+
+        .background {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('ustogether.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: 1;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff4d6d, #ffb3c1); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    text-align: center;
+    letter-spacing: 2px;
+    margin: 30px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3); 
+}
+
+        footer i { color: var(--accent-color); margin: 0 5px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .instruction { color: #888; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="background"></div>
+        <div class="hero-content">
+            <h1>Happy 3rd Anniversary and Happy Valentine's day my love!</h1>
+            <p class="message">To my dearest Mayeng, every moment with you is a treasure. ❤️</p>
+        </div>
+        
+    </section>
+
+    <section class="envelope-section">
+        <div class="envelope-container" id="mainContainer" onclick="toggleLetter()">
+            <div class="envelope-wrapper">
+                <div class="lid"></div>
+                <div class="heart-seal"><i class="fas fa-heart"></i></div>
+                <div class="letter-card">
+                    <div class="letter-text">
+                        <i class="fas fa-heart" style="color: var(--primary-red)"></i>
+                        <h2>To my love,</h2>
+                        <p style="font-size: 10px;">Mayeng, You are the most wonderful person I have ever met, and I am so grateful that I get to laugh and share all of my happy moments with you every single day.</p>
+                        <p style="font-size: 10px;">Your smile is the most beautiful thing in the world, and I swear to be by your side forever because I feel like the luckiest person alive right now when we are together.</p>
+                        <p style="font-size: 13px;"><strong>Happy anniversary & Happy Valentine's Day lovey!</strong></p>
+                    </div>
+                </div>
+                <div class="envelope-front"></div>
+            </div>
+        </div>
+        <p class="instruction">Click the envelope to open</p>
+    </section>
+
+    <section class="gallery">
+        <h2 style="font-size: 20px;">Our Memory Gallery</h2>
+        <div class="grid">
+            <img src="1.jpeg"  onclick="openLightbox(this.src)">
+            <img src="2.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="3.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="4.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="5.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="6.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="7.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="8.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="9.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="10.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="11.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="12.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="13.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="14.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="15.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="16.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="17.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="18.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="19.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="20.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="21.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="22.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="23.png" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="24.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="25.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="26.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="27.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="28.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="29.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="30.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="41.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="42.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="52.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="50.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="33.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="49.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="43.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="36.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="51.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="38.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="48.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            <img src="45.jpeg" alt="Memory" onclick="openLightbox(this.src)">
+            
+            </div>
+    </section>
+
+    <section class="video-section">
+        <h2>A Video for You</h2>
+        <button class="play-button" onclick="showVideo()">
+            <i class="fas fa-play"></i> Play Our Love Story
+        </button>
+        <div class="video-container" id="videoContainer">
+            <video id="anniversaryVideo" controls>
+                <source src="us.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <footer>
+        <p>Crafted with love by RJ GWAPO | FEBRUARY 14, 2026</p>
+        <i class="fas fa-heart"></i>
+    </footer>
+
+    <script>
+        function toggleLetter() {
+            document.getElementById('mainContainer').classList.toggle('open');
+        }
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function showVideo() {
+            const container = document.getElementById('videoContainer');
+            const video = document.getElementById('anniversaryVideo');
+            container.style.display = 'block';
+            video.play();
+        }
+    </script>
+</body>
+</html>
